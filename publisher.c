@@ -2,3 +2,29 @@
 #include <stdio.h>
 #include "publisher.h"
 #include "observer.h"
+
+Publisher_t * publisher_new(){
+    return (Publisher_t*)malloc(sizeof(Publisher_t));
+}
+
+void Publish(Publisher_t* this, char* msg){
+    
+    for (int i = 0; i < this->subs; i++)
+    {
+        Update(*((this->subscribers)+(this->subs)), msg);
+    }
+    
+}
+
+void Publisher_ctor(Publisher_t * this){
+    this->subs = 1;
+}
+
+void Publisher_dtor(Publisher_t * this){
+    free(this);
+}
+
+void Add_Subscriber(Publisher_t * this, Observer_t* sub){
+    *((this->subscribers)+(this->subs)) = *sub;
+    this->subs++;
+}
