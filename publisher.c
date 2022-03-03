@@ -11,13 +11,14 @@ void Publish(Publisher_t* this, char* msg){
     
     for (int i = 0; i < this->subs; i++)
     {
-        Update(*((this->subscribers)+(this->subs)), msg);
+        Update(this->subscribers[i], msg);
     }
     
 }
 
 void Publisher_ctor(Publisher_t * this){
-    this->subs = 1;
+    this->subs = 0;
+    this->subscribers = malloc(sizeof(this->subscribers));
 }
 
 void Publisher_dtor(Publisher_t * this){
@@ -25,6 +26,6 @@ void Publisher_dtor(Publisher_t * this){
 }
 
 void Add_Subscriber(Publisher_t * this, Observer_t* sub){
-    *((this->subscribers)+(this->subs)) = *sub;
+    *this->subscribers[this->subs] = *sub;
     this->subs++;
 }

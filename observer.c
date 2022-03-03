@@ -17,6 +17,6 @@ void Observer_dtor(Observer_t* this){
 }
 
 void Update(Observer_t* this, char* msg){
-    printf("%s has been updated: %s", this->name, msg);
+    printf("%s has been updated: %s\n", this->name, msg);
 }
 
