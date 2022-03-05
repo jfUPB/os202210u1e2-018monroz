@@ -3,29 +3,43 @@
 #include "publisher.h"
 #include "observer.h"
 
-Publisher_t * publisher_new(){
-    return (Publisher_t*)malloc(sizeof(Publisher_t));
+Publisher_t * publisher_new(void* impl){
+    Publisher_t* this =  malloc(sizeof(Publisher_t));
+    this->impl = impl;
+    this->subs = 0;
+    this->observers = malloc(20*sizeof(Observer_t));
+    return this;
 }
 
-void Publish(Publisher_t* this, char* msg){
+void Publish(Publisher_t* this){
     
-    for (int i = 0; i < this->subs; i++)
+    for (int i = 0; i < 20; i++)
     {
-        Update(this->subscribers[i], msg);
+        if (this->observers[i] != NULL) {
+
+			Update(this->observers[i], this->impl);
+		
+        }
     }
     
 }
 
 void Publisher_ctor(Publisher_t * this){
     this->subs = 0;
-    this->subscribers = malloc(sizeof(this->subscribers));
+    
 }
 
 void Publisher_dtor(Publisher_t * this){
     free(this);
 }
 
-void Add_Subscriber(Publisher_t * this, Observer_t* sub){
-    *this->subscribers[this->subs] = *sub;
+void Register_observer(Publisher_t* this, Observer_t* observer){
+    if(this->subs>19)
+    {
+        printf("All possible Observers Occuped");
+        return;
+    }
+    *this->observers[this->subs] = *observer;
     this->subs++;
 }
+

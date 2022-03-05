@@ -3,20 +3,22 @@
 #include "publisher.h"
 #include "observer.h"
 
-Observer_t* Observer_new(){
-    return (Observer_t*)malloc(sizeof(Observer_t));
+Observer_t* Observer_new(void* impl, void (*funcion)(void*, void*)){
+    Observer_t* this = malloc(sizeof(Observer_t));
+    this->notifyImpl = funcion;
+    return this;
 }
 
-void Observer_ctor(Observer_t* this, char* name){
-    this->name = name;
-}
 
 void Observer_dtor(Observer_t* this){
     this->name = NULL;
     free(this);
 }
 
-void Update(Observer_t* this, char* msg){
-    printf("%s has been updated: %s\n", this->name, msg);
+void Update(Observer_t* this, void* subject){
+    this->notifyImpl(this->impl, subject);
 }
+
+
+
 

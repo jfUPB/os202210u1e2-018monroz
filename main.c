@@ -1,25 +1,22 @@
 #include <stdio.h>
 #include "publisher.h"
 #include "observer.h"
+#include "subscriber.h"
+#include "channel.h"
 
 int main(int argc, char** argv){
 
-    Publisher_t* publisher = publisher_new();
-    Publisher_ctor(publisher);
-    printf("Publisher has been created!\n");
+    Subscriber_t* monroz = Subscriber_new("monroz");
+    printf("Hecho\n");
+    Channel_t* rubius = Channel_new("Rubius");
+    printf("Hecho\n");
+    Subscribe(monroz, rubius);
+    printf("Hecho\n");
+    Notify(rubius);
 
-    Observer_t* observer1 = Observer_new();
-    Observer_ctor(observer1, "ob1");
-    printf("Observador creado!\n");
+    Subscriber_dtor(monroz);
+    Channel_dtor(rubius);
 
-    Observer_t* observer2 = Observer_new();
-    Observer_ctor(observer2, "ob2");
-    printf("Observador creado!\n");
-
-    Add_Subscriber(publisher, observer1);
-    Add_Subscriber(publisher, observer2);
-
-    Publish(publisher, "inicio");
-
+    return 0;
 
 }
