@@ -5,7 +5,7 @@
 
 void __sub_reaction(void* this) {
     Observer_t* observer = (Observer_t *) this;
-    printf("OMG he talked to a me (sub)! %s", observer->name);
+    printf("Wow, he´s Online! - * %s joined the stream* \n", observer->name);
 }
 
 Subscriber_t* sub_new(){

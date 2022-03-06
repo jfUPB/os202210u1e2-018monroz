@@ -9,26 +9,33 @@
 
 
 int main(int argc, char* argv[]) {
-    printf("0\n");
+
+    printf("CASE 1: SIMPLE OBSERVER, SIMPLE PUBLISHER\n");
+
     Observer_t *observer = Observer_new();
-    printf("1\n");
-    
-    Observer_ctor(observer, "Observador 1\n");
-    printf("2\n");
+
+    Observer_ctor(observer, "Observer 1");
+
+    Publisher_t* publisher = publisher_new();
+
+    Publisher_ctor(publisher);
+
+    Add_Observer(publisher, observer);
+
+    Publish(publisher);
+
+
+    printf("CASE 2: YOUTUBE SUBSCRIBER, YOUTUBE CHANNEL\n");
     
     Subscriber_t * sub1 = sub_new();
-    printf("3\n");
-    Subscriber_ctor(sub1, "Subscriptor1\n");
-    printf("4\n");
-    
-    Channel_t* channel = Channel_new();
-    Channel_ctor(channel, "rubius");
-    printf("5\n");
 
-    Add_Observer((Publisher_t*) channel, observer);
-    printf("6\n");
+    Subscriber_ctor(sub1, "018monroz");
+
+    Channel_t* channel = Channel_new();
+
+    Channel_ctor(channel, "Free C tutorial");
+
     Add_Observer((Publisher_t*) channel, (Observer_t*) sub1);
-    printf("7\n");
 
     Publish((Publisher_t*)channel);
     

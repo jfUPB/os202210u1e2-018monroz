@@ -2,10 +2,13 @@
 #define PUBLISHER_H
 #include "observer.h" //Referencia a la clase observador
 
+typedef void (*notification_way_t)(void *);
+
 typedef struct {
     char* name;
     Observer_t* observers[20];
     int subs;
+    notification_way_t notification_way;
 } Publisher_t;
 
 Publisher_t * publisher_new(); //New Publisher
