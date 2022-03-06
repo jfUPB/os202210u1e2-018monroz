@@ -3,14 +3,17 @@
 
 
 void Notify(Channel_t* this){
+
     printf("Boyz we are streaming rn!\n");
-    printf("pr1");
+
     printf("Welcomeeeeee to %s!\n", this->name);
-    printf("Welcomeeeeee to %s!\n", this->name);
-    printf("Pr2");
-    printf("Welcomeeeeee to %s!\n", this->name);
+
+    printf("Pr2\n");
+
     this->event = IDK;
-    
+
+    printf("pr3\n");
+
     Publish(this->publisher);
 }
 
@@ -27,6 +30,7 @@ ChannelEvent getEvent(Channel_t* this){
 void Add_subscriber(Channel_t* this, Observer_t* observer) {
    Register_observer(this->publisher, observer);
 }
+
 
 Channel_t* Channel_new(char* name){
     Channel_t* this = malloc(sizeof(Channel_t));

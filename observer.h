@@ -4,7 +4,6 @@
 
 /* Shape's attributes... */
 typedef struct {
-    char*  name; /* Estado del objeto publicador */
     void (*notifyImpl)(void*, void*);
     void* impl;
 } Observer_t;

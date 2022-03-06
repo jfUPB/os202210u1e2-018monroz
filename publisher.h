@@ -4,7 +4,7 @@
 
 typedef struct {
     char *  state; /* Estado del objeto publicador */
-    Observer_t (* observers)[20]; /* Lista de observadores pendientes al publicador */
+    Observer_t * observers[20]; /* Lista de observadores pendientes al publicador */
     int subs; // Cantidad de subs, necesario para recorrer lista.
 
     void* impl;

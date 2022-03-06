@@ -11,7 +11,6 @@ Observer_t* Observer_new(void* impl, void (*funcion)(void*, void*)){
 
 
 void Observer_dtor(Observer_t* this){
-    this->name = NULL;
     free(this);
 }
 

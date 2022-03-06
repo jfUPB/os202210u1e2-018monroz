@@ -28,6 +28,8 @@ void Add_subscriber(Channel_t* this, Observer_t* observer);
 
 ChannelEvent getEvent(Channel_t* this);
 
+void Show_Subs(Channel_t*);
+
 
 
 #endif /* CHANNEL_H */

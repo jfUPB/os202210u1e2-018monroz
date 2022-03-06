@@ -7,19 +7,19 @@ Publisher_t * publisher_new(void* impl){
     Publisher_t* this =  malloc(sizeof(Publisher_t));
     this->impl = impl;
     this->subs = 0;
-    this->observers = malloc(20*sizeof(Observer_t));
     return this;
 }
 
 void Publish(Publisher_t* this){
     
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < this->subs; i++)
     {
-        if (this->observers[i] != NULL) {
-
-			Update(this->observers[i], this->impl);
-		
+        if (this->observers[i]!=NULL)
+        {
+            Update(this->observers[i], this->impl);
         }
+        
+    	
     }
     
 }
@@ -34,12 +34,10 @@ void Publisher_dtor(Publisher_t * this){
 }
 
 void Register_observer(Publisher_t* this, Observer_t* observer){
-    if(this->subs>19)
-    {
-        printf("All possible Observers Occuped");
-        return;
-    }
-    *this->observers[this->subs] = *observer;
+
+    this->observers[this->subs] = observer;
     this->subs++;
+
+    
 }
 
