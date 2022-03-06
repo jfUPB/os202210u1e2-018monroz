@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "publisher.h": "c"
+        "publisher.h": "c",
+        "channel.h": "c"
     }
 }

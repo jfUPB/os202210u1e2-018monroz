@@ -4,6 +4,7 @@
 #include "observer.h"
 #include "subscriber.h"
 #include "publisher.h"
+#include "channel.h"
 
 
 
@@ -20,16 +21,16 @@ int main(int argc, char* argv[]) {
     Subscriber_ctor(sub1, "Subscriptor1\n");
     printf("4\n");
     
-    Publisher_t* publisher = publisher_new();
-    Publisher_ctor(publisher);
+    Channel_t* channel = Channel_new();
+    Channel_ctor(channel, "rubius");
     printf("5\n");
 
-    Add_Observer(publisher, observer);
+    Add_Observer((Publisher_t*) channel, observer);
     printf("6\n");
-    Add_Observer(publisher, (Observer_t*) sub1);
+    Add_Observer((Publisher_t*) channel, (Observer_t*) sub1);
     printf("7\n");
 
-    Publish(publisher);
+    Publish((Publisher_t*)channel);
     
 
 
