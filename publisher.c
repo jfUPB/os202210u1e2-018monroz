@@ -3,41 +3,29 @@
 #include "publisher.h"
 #include "observer.h"
 
-Publisher_t * publisher_new(void* impl){
-    Publisher_t* this =  malloc(sizeof(Publisher_t));
-    this->impl = impl;
-    this->subs = 0;
-    return this;
+Publisher_t * publisher_new(){
+    return (Publisher_t*)malloc(sizeof(Publisher_t));
 }
 
 void Publish(Publisher_t* this){
     
     for (int i = 0; i < this->subs; i++)
     {
-        if (this->observers[i]!=NULL)
-        {
-            Update(this->observers[i], this->impl);
-        }
-        
-    	
+        Observer_reaction(this->observers[i]);
     }
     
 }
 
 void Publisher_ctor(Publisher_t * this){
     this->subs = 0;
-    
 }
 
 void Publisher_dtor(Publisher_t * this){
     free(this);
 }
 
-void Register_observer(Publisher_t* this, Observer_t* observer){
-
-    this->observers[this->subs] = observer;
+void Add_Observer(Publisher_t * this, Observer_t* sub){
+    this->observers[this->subs] = sub;
     this->subs++;
-
-    
 }
 

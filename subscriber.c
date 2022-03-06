@@ -1,29 +1,24 @@
-#include "subscriber.h"
-#include "channel.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "subscriber.h"
 
-void Subscriber_dtor(Subscriber_t* this){
-    free(this);
+void __sub_reaction(void* this) {
+    Observer_t* observer = (Observer_t *) this;
+    printf("OMG he talked to a me (sub)! %s", observer->name);
 }
 
-void Subscribe(Subscriber_t* this, Channel_t* channel){
-
-    Add_subscriber(channel, this->observer);
-    
-    printf("Ty for the sub %s :D\n", this->name);
+Subscriber_t* sub_new(){
+    return malloc(sizeof(Subscriber_t));
 }
 
-void handleChannelEvent(Subscriber_t* this, Channel_t* channel){
-    printf("OMG %s talked to %s!", channel->name, this->name);
+void Subscriber_ctor(Subscriber_t *this, char* name) {
+
+    Observer_ctor((Observer_t *)this, name);
+    this->observer.name = name;
+    this->observer.obs_react = __sub_reaction;
 }
 
-void RefreshMailBox(Subscriber_t* this, void* publisher){
-    handleChannelEvent(this, (Channel_t*) publisher);
-}
-
-Subscriber_t* Subscriber_new(char* name){
-    Subscriber_t* this = malloc(sizeof(Subscriber_t));
-    this->name = name;
-    this->observer = Observer_new(this, (void (*)(void*,void*))RefreshMailBox);
-    return this;
+void Subscriber_dtor(Subscriber_t *this) {
+    Observer_dtor((Observer_t *)this);
 }

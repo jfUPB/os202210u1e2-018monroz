@@ -3,19 +3,18 @@
 #include "observer.h" //Referencia a la clase observador
 
 typedef struct {
-    char *  state; /* Estado del objeto publicador */
-    Observer_t * observers[20]; /* Lista de observadores pendientes al publicador */
-    int subs; // Cantidad de subs, necesario para recorrer lista.
-
-    void* impl;
+    char* name;
+    Observer_t* observers[20];
+    int subs;
 } Publisher_t;
 
-Publisher_t * publisher_new(void*); //New Publisher
+Publisher_t * publisher_new(); //New Publisher
 void Publisher_dtor(Publisher_t *); 
 void Publisher_ctor(Publisher_t *);
-void Register_observer(Publisher_t*,Observer_t* );
 
-void Publish(Publisher_t*);
+void Publish(Publisher_t* this);
+
+void Add_Observer(Publisher_t* this, Observer_t*);
 
 
 #endif /* PUBLISHER_H */

@@ -1,22 +1,22 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-
 /* Shape's attributes... */
+
+typedef void (*obs_react_t)(void *);
+
 typedef struct {
-    void (*notifyImpl)(void*, void*);
-    void* impl;
+    char*  name; /* Estado del objeto publicador */
+    obs_react_t obs_react;
 } Observer_t;
 
-Observer_t * Observer_new(void* impl, void(*funcion)(void*, void*)); //New observer
+Observer_t * Observer_new(); //New observer
 
 void Observer_dtor(Observer_t *); //Destructor
-
 void Observer_ctor(Observer_t *,char*); //Constructor (nombre)
+void Update(); //Informa
 
-void Update(Observer_t*, void*); //Informa
-
-
+void Observer_reaction(Observer_t*);
 
 
 

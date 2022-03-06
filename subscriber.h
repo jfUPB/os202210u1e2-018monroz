@@ -1,24 +1,17 @@
-#ifndef SUBSCRIBER_H
-#define SUBSCRIBER_H
-#include "publisher.h"
+#ifndef SUBSCRIBER_H_
+#define SUBSCRIBER_H_
+
 #include "observer.h"
-#include "channel.h"
-#include <stdlib.h>
 
-
-/* Shape's attributes... */
 typedef struct {
-    char*  name; /* Estado del objeto publicador */
-    Observer_t* observer;
+    Observer_t observer;
 } Subscriber_t;
 
-Subscriber_t * Subscriber_new(char*); //New observer
+Subscriber_t *sub_new();
 
-void Subscriber_dtor(Subscriber_t*); //Destructor
+void Subscriber_ctor(Subscriber_t *, char*);
 
-void Subscribe(Subscriber_t*, Channel_t*); //Informa
-
-
+void Subscriber_dtor(Subscriber_t *);
 
 
-#endif /* SUBSCRIBER_H */
+#endif /* SUBSCRIBER_H_ */
