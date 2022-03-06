@@ -20,8 +20,13 @@ Publisher_t * publisher_new(){
 void Publish(Publisher_t* this){
     Notification_way(this);
     for (int i = 0; i < this->subs; i++)
-    {
-        Observer_reaction(this->observers[i]);
+    {   
+        if (this->observers[i]!=NULL)
+        {
+            Observer_reaction(this->observers[i]);
+        }
+        
+        
     }
     
 }
@@ -38,6 +43,15 @@ void Publisher_dtor(Publisher_t * this){
 void Add_Observer(Publisher_t * this, Observer_t* sub){
     this->observers[this->subs] = sub;
     this->subs++;
+}
+
+void Remove_Observer(Publisher_t* this, Observer_t* sub){
+
+    for (int i; i < this->subs; i++) {
+		if (sub == this->observers[i]) {
+			this->observers[i] = NULL;
+		}
+	}
 }
 
 

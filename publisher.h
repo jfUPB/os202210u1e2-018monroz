@@ -19,5 +19,7 @@ void Publish(Publisher_t* this);
 
 void Add_Observer(Publisher_t* this, Observer_t*);
 
+void Remove_Observer(Publisher_t* this, Observer_t*);
+
 
 #endif /* PUBLISHER_H */
